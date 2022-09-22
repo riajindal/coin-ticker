@@ -1,3 +1,7 @@
+import 'utilities/networking.dart';
+
+const appid = '5B71C86C-BCF2-4817-9461-8890CA6D64DA';
+
 const List<String> currenciesList = [
   'AUD',
   'BRL',
@@ -28,4 +32,13 @@ const List<String> cryptoList = [
   'LTC',
 ];
 
-class CoinData {}
+class CoinData {
+  Future<dynamic> getCoinData(
+      String selectedCoin, String selectedCurrency) async {
+    Networking networking = Networking(
+        url:
+            'https://rest.coinapi.io/v1/exchangerate/$selectedCoin/$selectedCurrency?apikey=$appid');
+    var coinData = await networking.getData();
+    return coinData;
+  }
+}
